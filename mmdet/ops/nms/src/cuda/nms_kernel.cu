@@ -3,7 +3,6 @@
 #include <ATen/cuda/CUDAContext.h>
 #include <ATen/DeviceGuard.h>
 
-#include <THC/THC.h>
 #include <ATen/ceil_div.h>
 #include <ATen/cuda/ThrustAllocator.h>
 
@@ -85,8 +84,6 @@ at::Tensor nms_cuda_forward(const at::Tensor boxes, float nms_overlap_thresh) {
   const int col_blocks = at::ceil_div(boxes_num, threadsPerBlock);
 
   scalar_t* boxes_dev = boxes_sorted.data_ptr<scalar_t>();
-
-  THCState *state = at::globalContext().lazyInitCUDA(); // TODO replace with getTHCState
 
   unsigned long long* mask_dev = NULL;
   
