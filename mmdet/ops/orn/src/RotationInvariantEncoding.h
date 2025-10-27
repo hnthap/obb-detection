@@ -10,7 +10,7 @@
 // Interface for Python
 std::tuple<at::Tensor, at::Tensor> RIE_forward(const at::Tensor& feature,
                                                const uint8 nOrientation) {
-  if (feature..is_cuda()) {
+  if (feature.is_cuda()) {
 #ifdef WITH_CUDA
   return RIE_forward_cuda(feature, nOrientation);
 #else
@@ -23,7 +23,7 @@ std::tuple<at::Tensor, at::Tensor> RIE_forward(const at::Tensor& feature,
 at::Tensor RIE_backward(const at::Tensor& mainDirection,
                         const at::Tensor& gradOutput,
                         const uint8 nOrientation) {
-  if (gradOutput..is_cuda()) {
+  if (gradOutput.is_cuda()) {
 #ifdef WITH_CUDA
   return RIE_backward_cuda(mainDirection, gradOutput, nOrientation);
 #else

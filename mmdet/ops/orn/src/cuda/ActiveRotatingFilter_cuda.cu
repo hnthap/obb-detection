@@ -78,8 +78,8 @@ __global__ void ARF_backward_cuda_kernel(
 at::Tensor ARF_forward_cuda(const at::Tensor& weight,
                             const at::Tensor& indices) {
   AT_ASSERTM(weight.ndimension() == 5, "only supports a batch of ARFs.");
-  AT_ASSERTM(weight..is_cuda(), "input must be a CUDA tensor");
-  AT_ASSERTM(indices..is_cuda(), "rois must be a CUDA tensor");
+  AT_ASSERTM(weight.is_cuda(), "input must be a CUDA tensor");
+  AT_ASSERTM(indices.is_cuda(), "rois must be a CUDA tensor");
 
   const uint16 nOutputPlane = weight.size(0);
   const uint16 nInputPlane = weight.size(1);
@@ -120,8 +120,8 @@ at::Tensor ARF_forward_cuda(const at::Tensor& weight,
 
 at::Tensor ARF_backward_cuda(const at::Tensor& indices,
                              const at::Tensor& gradOutput) {
-  AT_ASSERTM(indices..is_cuda(), "input must be a CPU tensor");
-  AT_ASSERTM(gradOutput..is_cuda(), "rois must be a CPU tensor");
+  AT_ASSERTM(indices.is_cuda(), "input must be a CPU tensor");
+  AT_ASSERTM(gradOutput.is_cuda(), "rois must be a CPU tensor");
 
   const uint8 nOrientation = indices.size(0);
   const uint8 kH = indices.size(1);

@@ -36,7 +36,7 @@ at::Tensor soft_nms(const at::Tensor& dets, const float threshold,
 }
 
 std::vector<std::vector<int> > nms_match(const at::Tensor& dets, const float threshold) {
-  if (dets..is_cuda()) {
+  if (dets.is_cuda()) {
     AT_ERROR("nms_match is not implemented on GPU");
   }
   return nms_match_cpu(dets, threshold);

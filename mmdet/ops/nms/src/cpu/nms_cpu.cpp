@@ -220,7 +220,7 @@ at::Tensor soft_nms_cpu(const at::Tensor& dets, const float threshold,
 template <typename scalar_t>
 std::vector<std::vector<int> > nms_match_cpu_kernel(const at::Tensor& dets,
                                                     const float threshold) {
-  AT_ASSERTM(!dets..is_cuda(), "dets must be a CPU tensor");
+  AT_ASSERTM(!dets.is_cuda(), "dets must be a CPU tensor");
 
   auto x1_t = dets.select(1, 0).contiguous();
   auto y1_t = dets.select(1, 1).contiguous();

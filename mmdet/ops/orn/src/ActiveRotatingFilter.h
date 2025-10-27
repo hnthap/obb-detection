@@ -10,7 +10,7 @@
 // Interface for Python
 at::Tensor ARF_forward(const at::Tensor& weight,
                        const at::Tensor& indices) {
-  if (weight..is_cuda()) {
+  if (weight.is_cuda()) {
 #ifdef WITH_CUDA
   return ARF_forward_cuda(weight, indices);
 #else
@@ -22,7 +22,7 @@ at::Tensor ARF_forward(const at::Tensor& weight,
 
 at::Tensor ARF_backward(const at::Tensor& indices,
                         const at::Tensor& gradOutput) {
-  if (gradOutput..is_cuda()) {
+  if (gradOutput.is_cuda()) {
 #ifdef WITH_CUDA
   return ARF_backward_cuda(indices, gradOutput);
 #else

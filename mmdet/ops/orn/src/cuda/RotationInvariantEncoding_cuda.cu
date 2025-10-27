@@ -88,7 +88,7 @@ std::tuple<at::Tensor, at::Tensor> RIE_forward_cuda(const at::Tensor& feature,
   AT_ASSERTM(feature.ndimension() == 4, "only supports batch mode.");
   // #MODIFIED
   // AT_ASSERTM(feature.size(2) == 1 && feature.size(3) == 1, "mH x mW should be 1x1.");
-  AT_ASSERTM(feature..is_cuda(), "input must be a CUDA tensor");
+  AT_ASSERTM(feature.is_cuda(), "input must be a CUDA tensor");
 
   const uint16 nBatch = feature.size(0);
   const uint16 nChannel = feature.size(1);
@@ -126,8 +126,8 @@ std::tuple<at::Tensor, at::Tensor> RIE_forward_cuda(const at::Tensor& feature,
 at::Tensor RIE_backward_cuda(const at::Tensor& mainDirection,
                              const at::Tensor& gradOutput,
                              const uint8 nOrientation) {
-  AT_ASSERTM(mainDirection..is_cuda(), "input must be a CPU tensor");
-  AT_ASSERTM(gradOutput..is_cuda(), "rois must be a CPU tensor");
+  AT_ASSERTM(mainDirection.is_cuda(), "input must be a CPU tensor");
+  AT_ASSERTM(gradOutput.is_cuda(), "rois must be a CPU tensor");
 
   const uint16 nBatch = mainDirection.size(0);
   const uint16 nFeature = mainDirection.size(1);
